@@ -1,5 +1,9 @@
 import random
 import time
+import os
+
+
+def clear(): return os.system('cls')
 
 
 def play():
@@ -41,4 +45,5 @@ def is_win(player, opponent):
         return True
 
 
+clear()
 print(play())
