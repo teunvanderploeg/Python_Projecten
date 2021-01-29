@@ -26,8 +26,8 @@ class MyHandler(FileSystemEventHandler):
             os.rename(src, new_destination)
 
 
-folder_to_track = "/Users/teun/Bureaublad/testFolder1"
-folder_destination = "/Users/teun/Bureaublad/testFolder2"
+folder_to_track = "/Users/teun/OneDrive/Bureaublad/testFolder1"
+folder_destination = "/Users/teun/OneDrive/Bureaublad/testFolder2"
 event_handler = MyHandler()
 observer = Observer()
 observer.schedule(event_handler, folder_to_track, recursive=True)
