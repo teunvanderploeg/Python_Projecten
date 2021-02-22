@@ -4,12 +4,12 @@ import time
 language = int(input("Do you want the game in \n1. English \n2. Dutch\n"))
 
 if language > 2:
-    print("There is no such language")
+    print("\nThere is no such language")
     time.sleep(5)
     exit()
 
 if language < 0:
-    print("Verry funny")
+    print("\nVerry funny")
     time.sleep(5)
     exit()
 
@@ -26,7 +26,7 @@ elif choice == "i":
     print("")
 
 else:
-    print("Dat was geen i of c!")
+    print("\nDat was geen i of c!")
     time.sleep(5)
     exit()
 
@@ -39,11 +39,11 @@ else:
 
 if hard < 1:
     if language == 1:
-        print(f"Number too low [-_-]")
+        print(f"\nNumber too low [-_-]")
         time.sleep(5)
         exit()
     else:
-        print(f"Keuze is te laag [-_-]")
+        print(f"\nKeuze is te laag [-_-]")
         time.sleep(5)
         exit()
 
@@ -68,7 +68,7 @@ def guess(x):
                 print('Nummer te hoog.')
    
     
-    print(f"Je hebt nummer {random_number} geraden en dat was goed")
+    print(f"\nJe hebt nummer {random_number} geraden en dat was goed")
     time.sleep(5)
 
 def computer_guess(x):
@@ -92,9 +92,12 @@ def computer_guess(x):
             low = guess + 1
 
     if language == 1:
-        print(f'It is {guess}. Computer know everything')
+        print(f'\nIt is {guess}. Computer know everything')
+        time.sleep(5)
+
     else:
-        print(f'Het nummer is {guess}. Je computer weet alles')
+        print(f'\nHet nummer is {guess}. Je computer weet alles')
+        time.sleep(5)
 
 
 if choice == 'c':
