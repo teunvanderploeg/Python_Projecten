@@ -1,6 +1,7 @@
 import random
 import time
 
+
 language = int(input("Do you want the game in \n1. English \n2. Dutch\n"))
 
 if language > 2:
@@ -51,6 +52,8 @@ if hard < 1:
 def guess(x):
     random_number = random.randint(1, x)
     guess = 0
+    kies = 0
+
 
     while guess != random_number:
         if language == 1:
@@ -66,13 +69,15 @@ def guess(x):
                 print('Nummer te laag.')
             elif guess > random_number:
                 print('Nummer te hoog.')
+        kies += 1
    
     
-    print(f"\nJe hebt nummer {random_number} geraden en dat was goed")
+    print(f"\nJe hebt nummer {random_number} geraden en dat was goed. Je hebt het geraden in {kies} keer")
     time.sleep(5)
 
 def computer_guess(x):
     low = 1
+    kies = 0
     high = x
     feedback = ''
     while feedback != 'c':
@@ -90,13 +95,14 @@ def computer_guess(x):
             high = guess - 1
         elif feedback == 'l':
             low = guess + 1
+        kies += 1
 
     if language == 1:
-        print(f'\nIt is {guess}. Computer know everything')
+        print(f'\nIt is {guess}. And in {kies} guesses. Computer know everything')
         time.sleep(5)
 
     else:
-        print(f'\nHet nummer is {guess}. Je computer weet alles')
+        print(f'\nHet nummer is {guess}. En in {kies} keuzes. Je computer weet alles')
         time.sleep(5)
 
 
