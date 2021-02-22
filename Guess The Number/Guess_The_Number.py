@@ -1,12 +1,16 @@
 import random
+import time
 
 language = int(input("Do you want the game in \n1. English \n2. Dutch\n"))
 
 if language > 2:
     print("There is no such language")
+    time.sleep(5)
     exit()
+
 if language < 0:
     print("Verry funny")
+    time.sleep(5)
     exit()
 
 
@@ -18,11 +22,13 @@ else:
 if choice == "c":
     print("")
 
-if choice == "i":
+elif choice == "i":
     print("")
 
 else:
-    quit()
+    print("Dat was geen i of c!")
+    time.sleep(5)
+    exit()
 
 if language == 1:
     hard = int(input('How hard do you want it to be, give a number between 1 and infinity: '))
@@ -34,9 +40,11 @@ else:
 if hard < 1:
     if language == 1:
         print(f"Number too low [-_-]")
+        time.sleep(5)
         exit()
     else:
         print(f"Keuze is te laag [-_-]")
+        time.sleep(5)
         exit()
 
 
@@ -61,6 +69,7 @@ def guess(x):
    
     
     print(f"Je hebt nummer {random_number} geraden en dat was goed")
+    time.sleep(5)
 
 def computer_guess(x):
     low = 1
