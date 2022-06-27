@@ -1,19 +1,48 @@
 import curses
+import os
+import random
 from curses import wrapper
 import queue
 import time
 
 maze = [
-    ["#", "O", "#", "#", "#", "#", "#", "#", "#"],
-    ["#", " ", " ", " ", " ", " ", " ", " ", "#"],
-    ["#", " ", "#", "#", " ", "#", "#", " ", "#"],
-    ["#", " ", "#", " ", " ", " ", "#", " ", "#"],
-    ["#", " ", "#", "#", "#", " ", "#", " ", "#"],
-    ["#", " ", "#", " ", " ", " ", "#", " ", "#"],
-    ["#", " ", "#", " ", "#", " ", "#", "#", "#"],
-    ["#", " ", " ", " ", "#", " ", " ", " ", "#"],
-    ["#", "#", "#", "#", "#", "#", "#", "X", "#"]
+    ["#", "O", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
+    ["#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#"],
+    ["#", " ", "#", "#", " ", " ", "#", "#", "#", " ", " ", "#", "#", "#", " ", "#"],
+    ["#", " ", "#", " ", " ", " ", "#", " ", " ", " ", "#", " ", " ", "#", " ", "#"],
+    ["#", " ", "#", "#", "#", " ", "#", " ", "#", " ", "#", " ", " ", "#", " ", "#"],
+    ["#", " ", "#", " ", " ", " ", "#", " ", " ", " ", "#", " ", " ", "#", " ", "#"],
+    ["#", " ", "#", " ", "#", " ", " ", "#", " ", "#", "#", " ", " ", "#", " ", "#"],
+    ["#", " ", " ", " ", "#", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", "#"],
+    ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "X", "#"]
 ]
+
+
+def make_random_maze(maze_height=10, maze_with=10):
+    maze = []
+    x = 0
+    while x < maze_height:
+        y = 0
+        line = []
+        while y < maze_with:
+            if x == 1 and y == 1:
+                line.append("O")
+            elif x == maze_height - 2 and y == maze_with - 2:
+                line.append("X")
+            else:
+                if x == 0 or x == maze_height - 1 or y == 0 or y == maze_with - 1:
+                    line.append("#")
+                else:
+
+                    if random.randint(0, 2) == 0:
+                        line.append("#")
+                    else:
+                        line.append(" ")
+            y += 1
+
+        maze.append(line)
+        x += 1
+    return maze
 
 
 def print_maze(maze, stdscr, path=[]):
@@ -23,9 +52,9 @@ def print_maze(maze, stdscr, path=[]):
     for i, row in enumerate(maze):
         for j, value in enumerate(row):
             if (i, j) in path:
-                stdscr.addstr(i, j * 2, "X", RED)
+                stdscr.addstr(i, j, "X", RED)
             else:
-                stdscr.addstr(i, j * 2, value, CYAN)
+                stdscr.addstr(i, j, value, CYAN)
 
 
 def find_start(maze, start):
@@ -52,7 +81,7 @@ def find_path(maze, stdscr):
 
         stdscr.clear()
         print_maze(maze, stdscr, path)
-        time.sleep(0.1)
+        time.sleep(0.05)
         stdscr.refresh()
 
         if maze[row][col] == end:
@@ -69,6 +98,7 @@ def find_path(maze, stdscr):
             new_path = path + [neighbor]
             q.put((neighbor, new_path))
             visited.add(neighbor)
+    return maze
 
 
 def find_neighbors(maze, row, col):
@@ -86,7 +116,7 @@ def find_neighbors(maze, row, col):
     return neighbors
 
 
-def main(stdscr):
+def setup_maze(stdscr):
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
 
@@ -94,4 +124,19 @@ def main(stdscr):
     stdscr.getch()
 
 
-wrapper(main)
+def main():
+    set_maze()
+    wrapper(setup_maze)
+
+
+def set_maze():
+    global maze
+    random_maze = input('Random maze? (y/n): ')
+    if random_maze == 'y':
+        size = os.get_terminal_size()
+        maze = make_random_maze(size[1] - 2, size[0] - 2)
+    return maze
+
+
+if __name__ == "__main__":
+    main()
