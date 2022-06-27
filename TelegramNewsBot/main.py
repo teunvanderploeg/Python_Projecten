@@ -4,11 +4,11 @@ import Responses as R
 
 
 def start_command(update, context):
-    update.message.reply_text('You can doe /news to get the latest news.')
+    update.message.reply_text('you can do /news to get the latest news.')
 
 
 def help_command(update, context):
-    update.message.reply_text('/news to get news')
+    update.message.reply_text('To get the latest news you can use /news')
 
 
 def handle_message(update, context):
