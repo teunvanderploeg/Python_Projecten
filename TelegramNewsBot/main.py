@@ -2,8 +2,6 @@ import Constants as keys
 from telegram.ext import *
 import Responses as R
 
-print('Bot started..')
-
 
 def start_command(update, context):
     update.message.reply_text('You can doe /news to get the latest news.')
@@ -25,6 +23,7 @@ def error(update, context):
 
 
 def main():
+    print('Bot started..')
     updater = Updater(keys.API_KEY)
     dp = updater.dispatcher
 
